@@ -7,7 +7,7 @@ body {
 li.active {
   background-color: #a4aaaf;
   color: #ffff;
-  padding: 0.5rem 1rem;
+  padding: 0.5rem 0.8rem;
   border-radius: 9999px;
 }
 
