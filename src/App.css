@@ -3,3 +3,24 @@
 body {
   font-family: 'Assistant', sans-serif;
 }
+
+li.active {
+  background-color: #a4aaaf;
+  color: #ffff;
+  padding: 0.5rem 1rem;
+  border-radius: 9999px;
+}
+
+.animate {
+  animation: skeletion-loading 1.5s infinite ease-out alternate;
+}
+
+@keyframes skeletion-loading {
+  0% {
+    background-color: hsl(200, 0%, 60%);
+  }
+
+  100% {
+    background-color: hsl(200, 0%, 90%);
+  }
+}
