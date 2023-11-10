@@ -3,7 +3,7 @@
 const Purchase = () => {
   return (
     <div>
-
+        
     </div>
   )
 }
