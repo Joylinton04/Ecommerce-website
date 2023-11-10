@@ -1,8 +1,8 @@
-<<<<<<< HEAD
+
 
 import {FaShoppingBag} from 'react-icons/fa'
 import ErrorOutlineIcon from '@mui/icons-material/ErrorOutline';
-=======
+/* =======
 import skincare from '../assets/skincare.png'
 import SwiperButton from '../component/SwiperButton';
 import { Swiper, SwiperSlide } from 'swiper/react';
@@ -13,7 +13,7 @@ import 'swiper/css/pagination';
 import 'swiper/css/scrollbar';
 import 'swiper/css';
 >>>>>>> 51f9b8ac8bd286ab20791c788b4396919af98e06
-
+ */
 const Purchase = () => {
   const items = [
     {
@@ -46,7 +46,7 @@ const Purchase = () => {
 
 
   return (
-<<<<<<< HEAD
+
     <div className='h-full'>
         <div className='flex flex-row md:flex-col'>
             <div className='w-[600px] md:w-full flex flex-col items-center'>
@@ -62,7 +62,7 @@ const Purchase = () => {
             <div className='w-full h-full border-l p-3'>
                  <div className='flex w-full justify-between p-4 border-b'>
                     <h1>My Purchase</h1>
-                    <span>HI,Joy</span>
+                    <span>Hi,Joy</span>
                  </div>
 
                  <div>
@@ -116,6 +116,10 @@ const Purchase = () => {
                  </div>
             </div>
         </div>
+    </div>
+    )
+  }
+    /*
 =======
     <div className='overflow-y-auto h-screen'>
         <Swiper
@@ -153,10 +157,8 @@ const Purchase = () => {
             <SwiperSlide>Slide 2</SwiperSlide>
             <SwiperSlide>Slide 3</SwiperSlide>
         </Swiper>
->>>>>>> 51f9b8ac8bd286ab20791c788b4396919af98e06
-    </div>
-  )
-}
+*/
+    
 
 export default Purchase;
 
