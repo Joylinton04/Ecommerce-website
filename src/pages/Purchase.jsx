@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 
 
 import {FaShoppingBag} from 'react-icons/fa'
@@ -14,38 +15,13 @@ import 'swiper/css/scrollbar';
 import 'swiper/css';
 >>>>>>> 51f9b8ac8bd286ab20791c788b4396919af98e06
  */
+=======
+
+
+>>>>>>> 468777e3eaf605f81c8cce767023efd8567adacd
 const Purchase = () => {
-  const items = [
-    {
-        img: "👕",
-        name: "shirts"
-    },
-    {
-        img: "🩳",
-        name: "Knickers"
-    },
-    {
-        img: "👗",
-        name: "Dress"
-    },
-    {
-        img: "🥼",
-        name: "Coats"
-    },
-    {
-        img: "👔",
-        name: "Shirts"
-    },
-    {
-        img: "👘",
-        name: "Knickers"
-    },
-  ]
-
-
-
-
   return (
+<<<<<<< HEAD
 
     <div className='h-full'>
         <div className='flex flex-row md:flex-col'>
@@ -159,6 +135,12 @@ const Purchase = () => {
         </Swiper>
 */
     
+=======
+    <div>
+        
+    </div>
+  )
+}
+>>>>>>> 468777e3eaf605f81c8cce767023efd8567adacd
 
 export default Purchase;
-
