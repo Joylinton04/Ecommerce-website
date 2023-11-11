@@ -11,7 +11,7 @@ import { useSearchParams } from "react-router-dom";
 
 const Home = () => {
     const { data,isLoading, fetchError } = useFetch()
-    //const [search,setSearch] = useState('')
+    
     const [searchResult,setSearchResult] = useState([])
     const [show, setShow] = useState(false)
     const [selected, setSelected] = useState(0)
@@ -30,12 +30,17 @@ const Home = () => {
      const { data:product,isLoading:prodLoading, fetchError:prodError } = useFetch(focusId)
 
      useEffect(() => {
-        const filteredResult = data.filter((item) => item.title.toLowerCase().includes(search.toLowerCase()));
+        const filteredResult = data.filter((item) => item.title.toLowerCase().includes(search.toLowerCase()) || item.category.toLowerCase().includes(search.toLowerCase()));
         setSearchResult(filteredResult);
-      }, [data, search]);      
-
+        
+      }, [data, search]);    
+      
+      
+     
+     
   return (
     <div className="h-full relative">
+       
         <TopCollection/>
         <div className=" w-full flex mb-20 rounded-t-[5rem] py-6 px-8 lg:px-6 min-h-screen">
                 <div className="h-full mt-10" style={product ? {width: '75%'}: {width: '100%'}}>
@@ -57,13 +62,21 @@ const Home = () => {
                                         },{replace: true}
                                     )}/>
                             </div>
+
+                            
+
                         </div>
                         <ul className="flex flex-wrap gap-20 items-center text-2xl capitalize cursor-pointer mt-8 2xl:gap-10 lg:text-lg">
-                            <li className="bg-slate-200 py-2 px-4 rounded-full">all products</li>
-                            <li>Electronics</li>
-                            <li>Jewelery</li>
-                            <li>men's clothing</li>
-                            <li>women's clothing</li>
+                            <li className="bg-slate-200 py-2 px-4 rounded-full" onClick={(e)=> setSearchParams(prev => {prev.set("search",'')
+                             return prev },{replace: true})}>all products</li>
+                            <li onClick={(e)=> setSearchParams(prev => {prev.set("search", e.target.textContent)
+                             return prev },{replace: true})}>Electronics</li>
+                            <li onClick={(e)=> setSearchParams(prev => {prev.set("search", e.target.textContent)
+                             return prev },{replace: true})}>Jewelery</li>
+                            <li onClick={(e)=> setSearchParams(prev => {prev.set("search", e.target.textContent)
+                             return prev },{replace: true})}>men's clothing</li>
+                            <li onClick={(e)=> setSearchParams(prev => {prev.set("search", e.target.textContent)
+                             return prev },{replace: true})}>women's clothing</li>
                         </ul>
                         <div className="mt-10 h-full flex flex-wrap gap-10 md:gap-6">
                             {isLoading && 
