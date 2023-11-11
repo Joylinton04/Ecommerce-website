@@ -18,6 +18,7 @@ const Home = () => {
     const [searchParams, setSearchParams] = useSearchParams({search: ""})
     const search = searchParams.get("search")
 
+
     const handleShow = (productId) => {
         setSelected(productId)
         setFocusId((prevFocusId) => (prevFocusId === productId ? null : productId));
@@ -81,7 +82,7 @@ const Home = () => {
                 {selected === focusId &&
                     <div className="w-1/4 lg:w-96 border-2 rounded-t-[3rem] px-6 py-4 mt-10 h-[180vh] sticky top-10">
                         {product && <Sidebar product={product}/>}
-                        {prodLoading && <LoadingSidebar/>}
+                        {/* {prodLoading && <LoadingSidebar/>} */}
                     </div>
                 }
         </div>

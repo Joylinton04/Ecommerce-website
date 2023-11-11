@@ -1,5 +1,6 @@
 import useFetch from "../hook/useFetch";
 import Loading from "../component/Loading";
+import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Pagination, Scrollbar, A11y } from 'swiper/modules';
@@ -39,7 +40,9 @@ const TopCollection = () => {
                                 <div className="flex items-center gap-10 w-2/3 lg:w-full">
                                     <p className="">{top.description}</p>
                                     <div>
-                                        <button className="bg-white px-4 py-2 text-black text-lg rounded-full w-32">See details</button>
+                                        <button className="bg-white px-4 py-2 text-black text-lg rounded-full w-32">
+                                            <Link to={`/purchase/${top.id}`}>See details</Link>
+                                        </button>
                                     </div>
                                 </div>
                             </div>

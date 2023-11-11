@@ -1,30 +1,36 @@
 import ArrowRightAltIcon from '@mui/icons-material/ArrowRightAlt';
 import { Link } from 'react-router-dom';
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { DataContext } from "../utils/contextApi";
-import { useNavigate } from "react-router";
+import useLocalStorage from "../hook/useLocalStorage";
 
 
 
 const Sidebar = ({product}) => {
     const { cart, setCart, setConfirmation } = useContext(DataContext)
-    const navigate = useNavigate()
+
+    const { setItem } = useLocalStorage('cart')
 
     const handleAddToCart = () => {
         const existingItem = cart.some((item) => item.id === product.id);
       
         setCart((prevCart) => {
-          if (existingItem) {
-            return prevCart;
-          } else {
-            return [...prevCart, product];
-          }
+            if (existingItem) {
+                return prevCart;
+            } else {
+                return [...prevCart, product];
+            }
         });
-        setConfirmation(!existingItem)
+    
+        setConfirmation(!existingItem);
         setTimeout(() => {
             setConfirmation(false);
-          }, 2000);
-      };
+        }, 2000);
+    };
+
+    useEffect(() => {
+        setItem([...cart])
+      }, [setItem, cart]);
 
   return (
     <div className='mt-10 sticky top-10 md:top-0'>

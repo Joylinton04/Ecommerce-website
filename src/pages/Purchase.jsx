@@ -5,21 +5,24 @@ import { useContext,useState,useEffect } from "react";
 import { DataContext } from "../utils/contextApi";
 import CartIcon from '../assets/cart4.png'
 import { useSearchParams } from 'react-router-dom';
+import useLocalStorage from "../hook/useLocalStorage";
 
 const Purchase = () => {
     const [searchResult,setSearchResult] = useState([])
     const { cart, setCart } = useContext(DataContext)
     const [searchParams, setSearchParams] = useSearchParams({search: ""})
     const search = searchParams.get("search")
+    //const { getItem,removeItem,setItem } = useLocalStorage('cart')
 
     const handleRemoveFromCart = (id) => {
         setCart((prevCart)=> {
             return prevCart.filter((cart) => cart.id !== id)
         })
+        //removeItem()
     }
 
     useEffect(() => {
-        const filteredResult = cart.filter((item) => item.title.toLowerCase().includes(search.toLowerCase()));
+        const filteredResult = cart.filter((item) => item.title.toLowerCase().includes(search.toLowerCase())).reverse()
         setSearchResult(filteredResult);
       }, [cart, search]);
 
@@ -29,8 +32,8 @@ const Purchase = () => {
 
     <div className='min-h-screen mb-20 mt-6'>
         <div className='flex flex-row md:flex-col'>
-            <div className='w-[600px] min-h-screen md:w-full flex flex-col items-center rounded-3xl px-4'>
-                <div className='sticky top-10 mt-10'>
+            <div className='w-[600px] md:w-full flex flex-col items-center rounded-3xl px-4'>
+                <div className='sticky top-10 md:h-full mt-10'>
                     <div className='h-[400px] w-full bg-slate-200 rounded-3xl'>
                         <img src={CartIcon} alt="" className='h-full w-full object-cover animate3'/>
                     </div>
