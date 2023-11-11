@@ -4,7 +4,7 @@ body {
   font-family: 'Assistant', sans-serif;
 }
 
-li.active {
+.active {
   background-color: #a4aaaf;
   color: #ffff;
   padding: 0.5rem 0.8rem;
