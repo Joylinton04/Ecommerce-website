@@ -7,14 +7,20 @@ import SearchIcon from '@mui/icons-material/Search';
 import { useState,useEffect } from "react";
 import ProductCards from "../component/ProductCards";
 import useFetch from "../hook/useFetch";
+import { useSearchParams } from "react-router-dom";
 
 const Home = () => {
     const { data,isLoading, fetchError } = useFetch()
-    const [search,setSearch] = useState('')
+    //const [search,setSearch] = useState('')
     const [searchResult,setSearchResult] = useState([])
     const [show, setShow] = useState(false)
     const [selected, setSelected] = useState(0)
     const [focusId, setFocusId] = useState(null)
+    const [searchParams, setSearchParams] = useSearchParams({
+        search: ""
+    })
+    const search = searchParams.get("search")
+    console.log(search)
 
     const handleShow = (productId) => {
         setSelected(productId)
@@ -24,9 +30,9 @@ const Home = () => {
      const { data:product,isLoading:prodLoading, fetchError:prodError } = useFetch(focusId)
 
      useEffect(() => {
-        const filteredResult = data.filter((data) => (((data.title).toLowerCase()).includes(search.toLowerCase())))
-        setSearchResult(filteredResult)
-     }),[data,search]
+        const filteredResult = data.filter((item) => item.title.toLowerCase().includes(search.toLowerCase()));
+        setSearchResult(filteredResult);
+      }, [data, search]);      
 
   return (
     <div className="h-full relative">
@@ -44,7 +50,12 @@ const Home = () => {
                                     value={search}
                                     id='cart' 
                                     className='text-base border-none px-4 py-2 rounded-full bg-transparent'
-                                    onChange={(e)=>setSearch(e.target.value)}/>
+                                    onChange={(e)=>setSearchParams(
+                                        prev => {
+                                            prev.set("search", e.target.value)
+                                            return prev
+                                        },{replace: true}
+                                    )}/>
                             </div>
                         </div>
                         <ul className="flex flex-wrap gap-20 items-center text-2xl capitalize cursor-pointer mt-8 2xl:gap-10 lg:text-lg">
@@ -54,7 +65,7 @@ const Home = () => {
                             <li>men's clothing</li>
                             <li>women's clothing</li>
                         </ul>
-                        <div className="mt-10 h-full flex flex-wrap gap-10">
+                        <div className="mt-10 h-full flex flex-wrap gap-10 md:gap-6">
                             {isLoading && 
                                 <>
                                     <LoadingCard/>
@@ -63,16 +74,17 @@ const Home = () => {
                                     <LoadingCard/>
                                 </>
                             }
-                            {data && 
-                                searchResult.map((product) => (
+                            {searchResult 
+                                ? searchResult.map((product) => (
                                     <ProductCards data={product} key={product.id} handleShow={handleShow}/>
                                 ))
+                                : <p className='font-bold text-6xl text-center'>No Result</p>    
                             }
                         </div>
                     </div>
                 </div>
                 {selected === focusId &&
-                    <div className="w-1/4 lg:w-96 border-2 rounded-t-[3rem] px-6 py-4 mt-10 h-[180vh] sticky top-6">
+                    <div className="w-1/4 lg:w-96 border-2 rounded-t-[3rem] px-6 py-4 mt-10 h-[180vh] sticky top-10">
                         {product && <Sidebar product={product}/>}
                         {prodLoading && <LoadingSidebar/>}
                     </div>

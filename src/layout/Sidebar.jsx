@@ -1,12 +1,32 @@
 import ArrowRightAltIcon from '@mui/icons-material/ArrowRightAlt';
-import shoe from '../assets/shoe.jpeg'
+import { Link } from 'react-router-dom';
+import { useContext } from "react";
+import { DataContext } from "../utils/contextApi";
+import { useNavigate } from "react-router";
+
+
 
 const Sidebar = ({product}) => {
+    const { cart, setCart } = useContext(DataContext)
+    const navigate = useNavigate()
+
+    const handleAddToCart = () => {
+        setCart((prevCart)=> {
+            const existingItem = prevCart.find((cart)=> cart.id === product.id )
+            if (existingItem){
+                return prevCart
+            } else {
+                return [...prevCart, product]
+            }
+        })
+        navigate(`/purchase`)
+    }
+
   return (
-    <div className='mt-10 sticky top-36 md:top-0'>
+    <div className='mt-10 sticky top-10 md:top-0'>
         <div className="flex justify-between items-center">
             <h1 className="text-3xl font-bold 2xl:text-2xl">Product Name</h1>
-            <p className="flex items-center 2xl:text-xs">See full view <span><ArrowRightAltIcon/></span></p>
+            <p className="flex items-center 2xl:text-xs"><Link to={`/purchase/${product.id}`}>See full view <span><ArrowRightAltIcon/></span></Link></p>
         </div>
         <div className='mt-20 capitalize bg-slate-200 w-max text-center rounded-full px-4 py-2'>
             <h1><span className='text-lg font-semibold'>Category: </span>shoes</h1>
@@ -43,6 +63,9 @@ const Sidebar = ({product}) => {
                     </div>
                 </div>
             </div>
+        </div>
+        <div className="mt-10">
+            <button className="py-4 px-4 rounded-lg bg-sky-500 text-white text-lg font-semibold" onClick={() => handleAddToCart()}>Add to cart</button>
         </div>
     </div>
   )
