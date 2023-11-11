@@ -27,9 +27,9 @@ const Home = () => {
      const { data:product,isLoading:prodLoading, fetchError:prodError } = useFetch(focusId)
 
      useEffect(() => {
-        const filteredResult = data.filter((item) => item.title.toLowerCase().includes(category.toLowerCase()) || item.category.toLowerCase().includes(category.toLowerCase()));
+        const filteredResult = data.filter((item) => item.title.toLowerCase().includes(category.toLowerCase() || search.toLowerCase()) || item.category.toLowerCase().includes(category.toLowerCase() || search.toLowerCase()));
         setSearchResult(filteredResult);
-      }, [data, category]);
+      }, [data, category,search]);
 
   return (
     <div className="h-full relative">
