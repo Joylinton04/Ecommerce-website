@@ -1,5 +1,4 @@
 import TopCollection from "../layout/TopCollection";
-import Category from "../layout/Category";
 import LoadingSidebar from "../component/LoadingSidebar";
 import LoadingCard from "../component/LoadingCard";
 import Sidebar from "../layout/Sidebar";
@@ -8,31 +7,27 @@ import { useState,useEffect } from "react";
 import ProductCards from "../component/ProductCards";
 import useFetch from "../hook/useFetch";
 import { useSearchParams } from "react-router-dom";
+import RenderComfirmation from "../component/RenderComfirmation";
 
 const Home = () => {
     const { data,isLoading, fetchError } = useFetch()
-    //const [search,setSearch] = useState('')
     const [searchResult,setSearchResult] = useState([])
     const [show, setShow] = useState(false)
     const [selected, setSelected] = useState(0)
     const [focusId, setFocusId] = useState(null)
-    const [searchParams, setSearchParams] = useSearchParams({
-        search: ""
-    })
+    const [searchParams, setSearchParams] = useSearchParams({search: ""})
     const search = searchParams.get("search")
-    console.log(search)
 
     const handleShow = (productId) => {
         setSelected(productId)
         setFocusId((prevFocusId) => (prevFocusId === productId ? null : productId));
-        //setShow((prevShow) => !prevShow);
       };
      const { data:product,isLoading:prodLoading, fetchError:prodError } = useFetch(focusId)
 
      useEffect(() => {
         const filteredResult = data.filter((item) => item.title.toLowerCase().includes(search.toLowerCase()));
         setSearchResult(filteredResult);
-      }, [data, search]);      
+      }, [data, search]);
 
   return (
     <div className="h-full relative">
@@ -90,6 +85,7 @@ const Home = () => {
                     </div>
                 }
         </div>
+        <RenderComfirmation/>
     </div>
   )
 }

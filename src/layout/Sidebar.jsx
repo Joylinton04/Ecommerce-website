@@ -7,20 +7,24 @@ import { useNavigate } from "react-router";
 
 
 const Sidebar = ({product}) => {
-    const { cart, setCart } = useContext(DataContext)
+    const { cart, setCart, setConfirmation } = useContext(DataContext)
     const navigate = useNavigate()
 
     const handleAddToCart = () => {
-        setCart((prevCart)=> {
-            const existingItem = prevCart.find((cart)=> cart.id === product.id )
-            if (existingItem){
-                return prevCart
-            } else {
-                return [...prevCart, product]
-            }
-        })
-        navigate(`/purchase`)
-    }
+        const existingItem = cart.some((item) => item.id === product.id);
+      
+        setCart((prevCart) => {
+          if (existingItem) {
+            return prevCart;
+          } else {
+            return [...prevCart, product];
+          }
+        });
+        setConfirmation(!existingItem)
+        setTimeout(() => {
+            setConfirmation(false);
+          }, 2000);
+      };
 
   return (
     <div className='mt-10 sticky top-10 md:top-0'>

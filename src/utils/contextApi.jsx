@@ -11,9 +11,11 @@ export const DataContext = createContext("")
 
 export const DataProvider = ({children}) => {
     const [cart, setCart] = useState([])
+    const [confirmation, setConfirmation] = useState(false)
+
     return (
         <DataContext.Provider value={{
-            cart,setCart
+            cart,setCart,confirmation,setConfirmation
         }}>
             {children}
         </DataContext.Provider>
